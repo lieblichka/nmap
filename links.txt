@@ -1,1 +1,3 @@
-https://nmap.org/nsedoc/index.html
+https://nmap.org/nsedoc/index.html # man scripts 
+https://nmap.org/book/nse-script-format.html # book of nse 
+
