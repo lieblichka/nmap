@@ -547,3 +547,58 @@ nmap -n -Pn -p 80 --open -sV -v --script http-method-tamper 192.168.0.1
 		# http скрипты также могут искать уязвимости, данный скрипт
 		попытается найти уязвимость настройки контроля доступа для методов
 		протокола http 
+	  
+		-n # no DNS resolution - не выполнять преобразование имени,
+		используется для ускорения процесса
+
+		-p 80 # определяем поиск только на 80 порту
+
+		--open # nmap покажет результаты только по открытым или потенциально
+		открытым портам 
+
+		-sV # определение версий
+		
+		-vvv # вербальность
+
+----WEB-SERVER SCRIPT
+
+nmap -n -Pn -p 80 --open -sV -vvv --script banner,http-title -iR 100
+		# при таком сканировании возможно найдется 1 или 2 работающих
+		web сервера на хостах 
+
+----DNS-SUBDNS SCRIPT
+
+nmap -Pn --script=dns-brute facebook.com 
+		# этот скрипт перебирает dns имена хостов путем bruteforce перебора
+		типовых поддоменов EX: mobile.facebook.com, news.facebook.com, etc..
+
+		# если требуется исчерпывающий список поддоменов можно использовать
+		инструменты: Fierce, theHarvester, Recon-ng
+
+----OS-DISCOVERY-SMB-PROTOCOL SCRIPT
+
+nmap --script smb-os-discovery -vv 192.168.0.1
+		# скрипт обнаружения ОС по протоколу SMB, locate *smb*.nse
+
+
+nmap -n -Pn -vv -O -sV --script smb-enum*,smb-ls,smb-mbenum,smb-os-discovery,
+smb-s*,smb-vuln* -vv 192.168.0.143
+		# практически команда выполнит все smb проверки, которые занимают
+		очень много времени 
+	
+----BROADCAST SCRIPT
+nmap --script broadcast -v # широковещательные запросы могут раскрыть
+		протокол и детали хоста, скриптовый движок nmap способен собирать
+		широковещательные данные сети при помощи данного скрипта
+
+		targets* # скрипты для обнаружения хостов работающих по ipv6
+		
+		# также скрипты broadcast могут обнаружить удаленные системы 
+		такие как: Dropbox, TeamViewer
+
+---SYNTAXIS VARIABLE 
+
+	"broadcast and not targets*"
+
+nmap --script "broadcast and not targets*" -v 
+		# исключает скрипты targets* из группы broadcast скриптов
