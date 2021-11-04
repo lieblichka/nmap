@@ -623,13 +623,17 @@ nmap --script "vuln,exploit" -vv 192.168.0.143 -sV -O
 nmap --script ip-geolocation-* facebook.com 
 		# поиск геолокации по доменному имени или ip адресу 
 		
-		--script ip-geolocation-maxmind # для данного скрипта 
-		понадобиться внешняя база данных по ссылке в файле LINKS.TXT
+		--script ip-geolocation-maxmind # обратиться к папке mannse 
+
+		--script ip-geolocation-ipinfodb # обратиться к папке mannse  
 		
-		далее нужно извлечь в локальную папку 
-		/usr/share/nmap/nselib/data 
+nmap --script whois* facebook.com # пример использования внешнего сервиса 
+		# whois для получения подробной информации о домене
+		
 
+----------------EXTERNAL SCRIPTS (СТОРОННИЕ СКРИПТЫ)--------------
+				скрипты не входящие в группы и основную базу скриптов
 
-
+w
 
 
