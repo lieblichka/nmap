@@ -1,0 +1,7 @@
+# MAXMIND sctipt 
+
+		для работы скрипта понадобиться база данных GEOIP 
+
+ссылка: http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz
+
+папка размещения базы: /usr/share/nmap/nselib/data
