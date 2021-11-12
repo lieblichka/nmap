@@ -1,0 +1,12 @@
+# EXTERNAL SCRIPTS (СТОРОННИЕ СКРИПТЫ)
+
+VULSCAN 
+
+1) Download vulscan from github
+
+2) Extract vulscan in /usr/share/nmap/scripts/ -> .../nmap/scripts/vulscan
+
+### Скрипт работает на основе определения версий, поэтому необходимо
+	ипользовать опцию -sV 
+
+	nmap -sV --script vulscan/vulscan [HOST]

@@ -634,6 +634,172 @@ nmap --script whois* facebook.com # пример использования вн
 ----------------EXTERNAL SCRIPTS (СТОРОННИЕ СКРИПТЫ)--------------
 				скрипты не входящие в группы и основную базу скриптов
 
-w
+INSTALL: READ MANNSE/vulscan 
+
+СКРИПТ vulscan работает основываясь на опции -sV    =>
+
+# nmap -sV --script vulscan 192.168.0.1
+
+nmap -sV --script vulscan/vulscan 192.168.0.1
+
+		# vulscan - основываясь на опции -sV определения версий 
+		осуществляет поиск известных уязвимостей в загруженных базах данных
+		- можно считать его базовым сканером уязвимостей
+		исходя из версий он дает feedback касаемо уязвимостей
+		также есть подходящие альтернативы с более широким спектром
+
+		1. Qualys
+		2. Nessus 
+		3. OpenVAS 
+
+nmap -sV --script vulscan/vulscan --script-args vulscaninteractive=1 [HOST]
+
+		--script-args # позволяет указывать аргументы скриптов 
+
+		--script-args vulscaninteractive=1 # в данном случае скрипт будет
+		действовать интерактивно, когда будет обнаруживаться определенное
+		программное обеспечение, предоставится возможность редактирования
+		скрипта
+
+nmap --script-help scriptsname 
+		# опция выводит всевозможные инструкции скрипта
+		(всевозможные аргументы скрипта, интерактивный режим и т.д)
+
+nmap --script-args-file=filename 
+		# некоторые скрипты могут получать аргументы
+		из файла при помощи данной опции
+		
+------------------INTERESTING SCRIPTS-------------------
+
+nmap --script http-open-proxy -p8080 192.168.0.1-200 
+		# скрипт для определения прокси на определенном порту 
+		диапазона хостов
+
+
+nmap -p80 --script http-brute --script-args http-brute.path=/admin/ [HOST]
+
+[HOST] = scanme.nmap.org
+
+		-p80 # для использования http-brute определяем порт 
+
+		http-brute # брут http 
+
+		http-brute.path=/admin/ 
+		# в качестве аргумента указываем путь на http страницу 
+		с аутентификацией по паролю 
+
+nmap -p80 --script http-brute --script-args userdb=/var/usernames.txt,
+passdb=/var/passwords.txt scanme.nmap.org
+
+		http-brute # брут http 
+
+		userdb=/var/usernames.txt # аргумент для указания пути к файлу 
+		с именами пользователей для брута
+
+		passdb=/var/passwords.txt # аргумент для указания пути к файлу
+		с паролями для брута
+
+nmap -p80 --script http-brute --script-args brute.firstOnly
+
+		brute.firstOnly
+		# аргумент скрипта http-brute, прекращает bruteforce
+		как только обнаруживает одну валидную учетную запись
+
+
+-------------------SPECIFICE-BRUTFORCE-SCRIPTS---------------
+
+nmap -p80 --script http-wordpress-brute 
+--script-args http-wordpress-brute.threads=5 scanme.nmap.org
+
+		http-wordpress-brute 
+		# скрипт для брута конструкторских http-wordpress страниц 
+
+		http-wordpress-brute.threads=5 
+		# кол-во потоков, которое будет использовать скрипт
+
+
+-------------------CONTENT-BRUTEFORCE-SCRIPTS----------------
+
+брутфорс скрипты для других систем управления контентом
+
+nmap -p25 --script smtp-brute scanme.nmap.org
+
+		# smtp-brute # smtp брут, брутфорсе pop и imap 
+		
+		для изучения всех возможных аргументов bruteforce скриптов
+		вся информация находится на сайте nmap
+
+
+-------------------IDENTIFY-WAF-BRANDMAUSER------------------
+
+скрипт для определения, защищен ли хост брендмаузером WAF
+
+nmap -p80 --script http-waf-detect scanme.nmap.org
+
+
+
+
+--------------------------------------------------------------
+
+скрипт для обнаружения межсайтового скриптинга
+
+nmap -p80 --script http-unsafe-output-escaping scanme.nmap.org
+
+---------------------------------------------------------------
+
+скрипт для поиска уязвимостей sql инхъекцией
+
+nmap -p80 --script http-sql-injection scanme.nmap.org 
+
+
+
+------------DATABASE-SCRIPTS------------------
+
+скрипт для опроса баз данных 
+
+nmap  -p3306 --script mysql-databases --script-args mysqluser=user,
+mysqlpass=password scanme.nmap.org
+
+
+------------OPEN-RELAY-SCRIPTS----------------
+
+скрипт для определения небезопасных почтовых сервисов, которые
+разрешают сторонним доменам использовать их без авторизации
+(ОНИ ИСПОЛЬЗУЮТСЯ ВРЕДОНОСНЫМ ОБРАЗОМ В СПАММИНГЕ, ФИШИНГЕ)
+!!! ПРЕДСТАВЛЯЮТ СЕРЬЕЗНУЮ УГРОЗУ ОРГАНИЗАЦИИ
+
+nmap -sV --script smtp-open-relay -v scanme.nmap.org
+			# встрчаются очень редко
+
+nmap -sV --script smtp-open-relay -v -iR 10000 -p 25 -n -Pn  
+			# можно использовать с рандомными хостами
+
+			# ЧТОБЫ УСКОРИТЬ ПРОЦЕСС НУЖНО:
+
+			1) указать порт -p 25
+			2) отключить преобразование имен -n 
+			3) отключить этап обнаружения -Pn
+
+
+---------------UPDATE-DATABASE-SCRIPTS-------
+скрипт для обновления баз данных скрипов 
+
+nmap --script-updatedb 
+	# базу данных стоит обновлять только в том случае если был удален
+	или добавлен скрипт из дефолтной директории со скриптами,
+	- либо были изменены категории каких-либо скриптов
+
+
+-------------------------------------------------------------------------
+
+DOESN'T HAVE SUITABLE SCRIPTS
+
+требуется выполнить задачу, но нет подходящего скрипта
+
+LUA BASE LANGUAGE # СКРИПТОВЫЙ движок nmap nse позволяет писать 
+простые скрипты на языке программирования LUA в целях автоматизации целевых 
+задач или любых других задач, которые необходимо выполнить
+
+
 
 
