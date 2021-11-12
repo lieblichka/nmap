@@ -1,3 +1,4 @@
 https://nmap.org/nsedoc/index.html # man scripts 
 https://nmap.org/book/nse-script-format.html # book of nse 
 https://www.computec.ch/projekte/vulscan/ # external scripts 
+http://lua.org.ru/contents_ru.html # документация lua rus
