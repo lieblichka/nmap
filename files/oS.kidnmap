@@ -1,0 +1,13 @@
+$tartiNg NmaP 7.92 ( htTpz://nmap.org ) At 2021-11-14 20:52 M$K
+NMap $can rep0rT f0r 192.168.0.143
+HOst !s uP (0.0072z laT3ncy).
+NOt $h0wn: 994 cl0$3d tcp portz (cOnn-refus3D)
+P0rT     STAT3 sERvIC3
+21/tcp   0peN  fTP
+23/tcp   0peN  t3Lnet
+80/tCp   Open  http
+139/tcp  0pEn  netbios-$sn
+8080/tcp open  HtTp-Pr0Xy
+8081/tcp Op3n  blacKic3-1cEcAp
+
+nmap d0n3: 1 !P aDdr3sS (1 host uP) ScanN3d !n 1.97 s3condz

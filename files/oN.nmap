@@ -1,0 +1,26 @@
+# Nmap 7.92 scan initiated Sat Nov 13 14:50:00 2021 as: nmap -T4 -oN files/new 192.168.0.143
+Nmap scan report for 192.168.0.143
+Host is up (0.0018s latency).
+Not shown: 994 closed tcp ports (reset)
+PORT     STATE SERVICE
+21/tcp   open  ftp
+23/tcp   open  telnet
+80/tcp   open  http
+139/tcp  open  netbios-ssn
+8080/tcp open  http-proxy
+8081/tcp open  blackice-icecap
+MAC Address: 00:1E:B8:02:D6:A5 (Aloys)
+
+# Nmap done at Sat Nov 13 14:50:00 2021 -- 1 IP address (1 host up) scanned in 1.00 seconds
+# Nmap 7.92 scan initiated Sun Nov 14 21:25:21 2021 as: nmap -T4 -oN files/oN.nmap --append-output 192.168.0.1
+Nmap scan report for 192.168.0.1
+Host is up (0.13s latency).
+Not shown: 996 closed tcp ports (reset)
+PORT      STATE SERVICE
+80/tcp    open  http
+5500/tcp  open  hotline
+9000/tcp  open  cslistener
+10004/tcp open  emcrmirccd
+MAC Address: 58:D9:D5:CC:C0:D0 (Tenda Technology,Ltd.Dongguan branch)
+
+# Nmap done at Sun Nov 14 21:25:24 2021 -- 1 IP address (1 host up) scanned in 3.46 seconds
